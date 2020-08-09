@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Евгений Семенов](https://up.htmlacademy.ru/ecmascript/12/user/1095219).
-* Наставник: `Неизвестно`.
+* Наставник: `Сергей Шершнев`.
 
 ---
 
