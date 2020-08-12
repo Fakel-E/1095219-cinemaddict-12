@@ -131,26 +131,13 @@ render(siteFilmContainer, createButtonShowTemplate(), `beforeend`);
 
 render(filmTemplate, createTopRatedTemplate(), `beforeend`);
 render(filmTemplate, createTopCommentTemplate(), `beforeend`);
-const filmTopElement = document.querySelector(`.films-list--extra`);
-const filmTopContainer = filmTopElement.querySelector(`.films-list__container`);
 const arrTopElement = document.querySelectorAll(`.films-list--extra`);
-/* for (let j = 0; j < FILM_TOP; j++) {
-  render(filmTopContainer, createFilmCard(), `beforeend`);
-}*/
 
-arrTopElement.forEach(function () {
+arrTopElement.forEach((topElementsContainer) => {
   for (let k = 0; k < FILM_TOP; k++) {
-    render(filmTopContainer, createFilmCard(), `beforeend`);
+    render(topElementsContainer.querySelector(`.films-list__container`), createFilmCard(), `beforeend`);
   }
-}
-);
-
-/* for (let j = 0; j < arrTopElement.length; j++) {
-  for () {
-
-  }
-  render(filmTopContainer, createFilmCard(), `beforeend`);
-}*/
+});
 
 render(siteStatisticElement, createStatisticTemplate(), `beforeend`);
 
