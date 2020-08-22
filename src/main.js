@@ -8,9 +8,13 @@ import {createTopRatedTemplate} from "./view/top-rate";
 import {createTopCommentTemplate} from "./view/top-comment";
 import {createStatisticTemplate} from "./view/statistic";
 import {createPopupTemplate} from "./view/popup";
+import {generateFilm} from "./mock/film";
 
-const FILM_COUNT = 5;
+const FILM_COUNT = 20;
 const FILM_TOP = 2;
+
+const films = new Array(FILM_COUNT).fill(``).map(generateFilm);
+// console.log(films)
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -32,7 +36,7 @@ const siteFilmContainer = filmTemplate.querySelector(`.films-list`);
 const filmCardContainer = siteFilmContainer.querySelector(`.films-list__container`);
 
 for (let i = 0; i < FILM_COUNT; i++) {
-  render(filmCardContainer, createFilmCard(), `beforeend`);
+  render(filmCardContainer, createFilmCard(films[i]), `beforeend`);
 }
 render(siteFilmContainer, createButtonShowTemplate(), `beforeend`);
 
