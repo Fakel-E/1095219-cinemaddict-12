@@ -1,10 +1,15 @@
-// import
+import {getRandomInteger} from "../util";
+import {mixArray} from "../util";
+import {generateRandom} from "../util";
+import {generateDate} from "../util";
+import {generateComment} from "../mock/comment";
+
 const FILM_NAME = [
-  `Начало`,
-  `Назад в Будущее`,
-  `Темный рыцарь`,
-  `Мстители`,
-  `Легенда № 17`,
+  `Begin`,
+  `Back to the Future`,
+  `Dark Knight`,
+  `Avengers`,
+  `Legend № 17`,
 ];
 const FILM_POSTER = [
   `images/posters/made-for-each-other.png`,
@@ -27,27 +32,28 @@ const FILM_DESCRIPTIONS = [
   `In rutrum ac purus sit amet tempus`,
 ];
 
-const FILM_RATE = [
-  `10`,
-  `9`,
-  `8`,
-  `7`,
-  `6`,
-  `5`,
+const FILM_DIRECTORS = [
+  `Anthony Mann`,
+  `Jason Mamoa`,
+  `Harisson Ford`,
 ];
 
-const FILM_YEAR = [
-  `2020`,
-  `2019`,
-  `2018`,
-  `2017`,
-  `2016`,
+const FILM_WRITERS = [
+  `Anne Wigton`,
+  `Heinz Herald`,
+  `Richard Weil`,
 ];
 
-const FILM_RUNTIME = [
-  `3h 00m`,
-  `2h 00m`,
-  `1h 00m`,
+const FILM_ACTORS = [
+  `Erich von Stroheim`,
+  `Mary Beth Hughes`,
+  `Dan Duryea`,
+];
+
+const FILM_COUNTRY = [
+  `USA`,
+  `Russia`,
+  `Finland`,
 ];
 
 const FILM_GENRES = [
@@ -57,52 +63,28 @@ const FILM_GENRES = [
   `Fantastic`,
 ];
 
-const getRandomInteger = (a = 0, b = 1) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-
-  return Math.floor(lower + Math.random() * (upper - lower + 1));
-};
-
-const mixArray = function (massive) {
-  for (let i = massive.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    let temp = massive[i];
-    massive[i] = massive[j];
-    massive[j] = temp;
-  }
-  massive.splice(0, getRandomInteger(0, massive.length - 1));
-  return massive;
-};
-
-const generateRandom = (elements) => {
-  const randomIndex = getRandomInteger(0, elements.length - 1);
-  return elements[randomIndex];
-};
-
-const generateDescription = () => {
-  const randomDescription = mixArray(FILM_DESCRIPTIONS);
-  return randomDescription;
-};
-
-export const generateComment = () => {
-  return {
-    emoji: `./images/emoji/smile.png`,
-    text: `какой-то текст комментария`,
-    author: `Пал-палыч`,
-    date: `Дата комментария`
-  };
-};
+const generateDescription = () => mixArray(FILM_DESCRIPTIONS);
 
 export const generateFilm = () => {
   return {
     name: generateRandom(FILM_NAME),
+    originalName: generateRandom(FILM_NAME),
     poster: generateRandom(FILM_POSTER),
+    director: generateRandom(FILM_DIRECTORS),
+    writers: mixArray(FILM_WRITERS),
+    actors: mixArray(FILM_ACTORS),
+    country: generateRandom(FILM_COUNTRY),
     description: generateDescription(),
-    rate: generateRandom(FILM_RATE),
-    year: generateRandom(FILM_YEAR),
-    runtime: generateRandom(FILM_RUNTIME),
-    genre: generateRandom(FILM_GENRES),
+    rate: getRandomInteger(5, 10),
+    date: generateDate(),
+    runtime: getRandomInteger(60, 260),
+    genre: mixArray(FILM_GENRES),
+    ageLimit: getRandomInteger(0, 18),
+    comments: new Array(getRandomInteger(1, 5)).fill(``).map(generateComment),
+    all: true,
+    isWatchlist: Boolean(getRandomInteger(0, 1)),
+    isWatched: Boolean(getRandomInteger(0, 1)),
+    isFavorite: Boolean(getRandomInteger(0, 1))
   };
 };
 

@@ -1,12 +1,14 @@
-export const createFilmCard = (films) => {
-  // console.log(films)
-  const {name, poster, description, rate, year, runtime, genre} = films;
+import {humanizeDate} from "../util";
+
+export const createFilmCard = (film) => {
+  const {name, poster, description, rate, date, runtime, genre, isWatchlist, isWatched, isFavorite} = film;
+
   return (
     `<article class="film-card">
       <h3 class="film-card__title">${name}</h3>
       <p class="film-card__rating">${rate}</p>
       <p class="film-card__info">
-        <span class="film-card__year">${year}</span>
+        <span class="film-card__year">${humanizeDate(date)}</span>
         <span class="film-card__duration">${runtime}</span>
         <span class="film-card__genre">${genre}</span>
       </p>
@@ -14,9 +16,12 @@ export const createFilmCard = (films) => {
       <p class="film-card__description">${description}</p>
       <a class="film-card__comments">5 comments</a>
       <form class="film-card__controls">
-        <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist">Add to watchlist</button>
-        <button class="film-card__controls-item button film-card__controls-item--mark-as-watched">Mark as watched</button>
-        <button class="film-card__controls-item button film-card__controls-item--favorite">Mark as favorite</button>
+        <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist
+        ${isWatchlist ? `film-card__controls-item--active` : ``}">Add to watchlist</button>
+        <button class="film-card__controls-item button film-card__controls-item--mark-as-watched
+        ${isWatched ? `film-card__controls-item--active` : ``}">Mark as watched</button>
+        <button class="film-card__controls-item button film-card__controls-item--favorite
+        ${isFavorite ? `film-card__controls-item--active` : ``}">Mark as favorite</button>
       </form>
     </article>`
   );
